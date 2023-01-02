@@ -1,0 +1,28 @@
+{
+    "params": 
+    {
+        "barcode_type": "datamatrix",
+        "templateFilename": "Avery_L7651_Word_Template_38mmx21mm.pdf",
+        "numCol": 5,
+        "numRow": 10,
+        "x0": 30,
+        "y0": 25,
+        "x_box_size": 100,
+        "y_box_size": 100,
+        "x_offset": 115,
+        "y_offset": 60
+    },
+    "TagList":
+    [
+        "1xlod_rdc184-a_01",
+        "1xlod_rdc184-a_02",
+        "1xlod_rdc184-a_03",
+        "1xlod_rdc184-a_04",
+        "1xlod_rdc184-a_05",
+        "1xlod_rdc184-a_06",
+        "1xlod_rdc184-a_07",
+        "1xlod_rdc184-a_08",
+        "1xlod_rdc184-a_09",
+        "1xlod_rdc184-a_10"
+    ]
+}
