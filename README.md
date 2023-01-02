@@ -26,4 +26,4 @@ After launching the sript with:
 python3 main.py
 ```
 
-The result is a new PDF file `template_file_with_codebar_tags.pdf` that contains the code bars added to the orioginal template.
+The result is a new PDF file `template_file_with_codebar_tags.pdf` that contains the code bars added to the original template.
