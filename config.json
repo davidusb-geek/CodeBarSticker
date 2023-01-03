@@ -1,8 +1,10 @@
 {
     "params": 
     {
-        "barcode_type": "datamatrix",
         "templateFilename": "Avery_L7651_Word_Template_38mmx21mm.pdf",
+        "barcode_type": "datamatrix",
+        "barcode_version": "20x20",
+        "barcode_textsize":3,
         "numCol": 5,
         "numRow": 10,
         "x0": 30,

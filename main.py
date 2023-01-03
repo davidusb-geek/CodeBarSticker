@@ -2,7 +2,28 @@ import json
 import treepoem
 from fitz import fitz
 import pathlib
+import os
+import sys
+from os import chdir
+from os.path import join
+from os.path import dirname
+from os import environ
 
+
+def get_path(filename):   
+    if hasattr(sys, '_MEIPASS'):
+        # PyInstaller >= 1.6
+        chdir(sys._MEIPASS)
+        filename = join(sys._MEIPASS, filename)
+    elif '_MEIPASS2' in environ:
+        # PyInstaller < 1.6 (tested on 1.5 only)
+        chdir(environ['_MEIPASS2'])
+        filename = join(environ['_MEIPASS2'], filename)
+    else:
+        chdir(dirname(sys.argv[0]))
+        filename = join(dirname(sys.argv[0]), filename)
+        
+    return filename
 
 def generate_bar_codes(data):
     for elm in data["TagList"]:
@@ -10,10 +31,11 @@ def generate_bar_codes(data):
         image = treepoem.generate_barcode(
             barcode_type=data["params"]["barcode_type"],  # One of the supported codes.
             data=elm, 
-            options={"includetext":True, "alttext":elm, "guardwhitespace":True, "textsize":3,
-                     "version":"20x20"}
+            options={"includetext":True, "alttext":elm, "guardwhitespace":True, 
+                     "textsize":data["params"]["barcode_textsize"],
+                     "version":data["params"]["barcode_version"]}
         ) 
-        image.save('tmp/'+elm+'.png')
+        image.save(get_path('tmp/'+elm+'.png'))
 
 def fill_pdf(pdf, x0, y0, x1, y1, img):
     rect = fitz.Rect(x0, y0, x1, y1)
@@ -22,7 +44,7 @@ def fill_pdf(pdf, x0, y0, x1, y1, img):
 if __name__ == "__main__":
 
     # Read the json file
-    with open('config.json') as f:
+    with open(get_path('config.json')) as f:
         data = json.load(f)
 
     # Create bar codes
@@ -45,5 +67,5 @@ if __name__ == "__main__":
             img = open(listPNG[count], "rb").read()
             fill_pdf(doc, x0+x_offset*col, y0+y_offset*row, x1+x_offset*col, y1+y_offset*row, img)
             count += 1
-    doc.save('template_file_with_codebar_tags.pdf')
+    doc.save(get_path('template_file_with_codebar_tags.pdf'))
     
