@@ -21,7 +21,7 @@ The `params` section contains the following configurable parameters:
 
 The `TagList` contains the list of values that will be encoded in the code bars.
 
-After launching the sript with:
+After launching the script with:
 ```
 python3 main.py
 ```
